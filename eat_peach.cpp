@@ -29,7 +29,8 @@ int cost_hour_for_k(vector<int> trees, int k) {
 }
 
 int leastK(vector<int> trees, int max, int limit) {
-	int  k = 1;
+#if 0
+	int k = 1;
 	int num = trees.size();
 	if (num > limit) {
 		return -1;
@@ -43,6 +44,38 @@ int leastK(vector<int> trees, int max, int limit) {
 		}
 	}
 	return -1;
+#else
+	// O(nlog(max))
+	int k = 1;
+	int min = 1;
+	int num = trees.size();
+	int cost_hour = 0;
+	int result = -1;
+	if (num > limit) {
+		return -1;
+	}
+	if (num == limit) {
+		return max;
+	}
+	while(1) {
+		k = (min + max) / 2;
+		if (min == k) {
+			break;
+		}
+		cost_hour = cost_hour_for_k(trees, k);
+		if (cost_hour == limit) {
+			return k;
+		}
+		else if (cost_hour > limit) {
+			min = k;
+		}
+		else if (cost_hour < limit) {
+			max = k;
+			result = k;
+		}
+	}
+	return result;
+#endif
 }
 
 int main () {
