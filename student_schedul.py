@@ -32,14 +32,15 @@ class Solution:
 
             #print("day:", day, "total_chapter_left:", total_chapter_left)
 
-            if total_chapter_left == 0 and is_need_do_paper == False:
-                #print("insert day", day)
-                res.append(day)
 
             if day >= start_do_paper and day <= stop_do_paper:
                 is_need_do_paper = True
             else :
                 is_need_do_paper = False
+
+            if total_chapter_left == 0 and is_need_do_paper == False:
+                #print("insert day", day)
+                res.append(day)
 
             if is_need_do_paper == False:
                 if total_chapter_left >= k:
